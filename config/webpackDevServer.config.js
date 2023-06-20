@@ -100,8 +100,15 @@ module.exports = function (proxy, allowedHost) {
       index: paths.publicUrlOrPath,
     },
     // `proxy` is run between `before` and `after` `webpack-dev-server` hooks
-    proxy,
-    onBeforeSetupMiddleware(devServer) {
+    proxy: {
+      "/entries": {
+        target: "https://api.publicapis.org",
+        changeOrigin: true,
+        secure: false,
+
+      },
+    },
+    onBeforeSetupMiddleware (devServer) {
       // Keep `evalSourceMapMiddleware`
       // middlewares before `redirectServedPath` otherwise will not have any effect
       // This lets us fetch source contents from webpack for the error overlay
@@ -112,7 +119,7 @@ module.exports = function (proxy, allowedHost) {
         require(paths.proxySetup)(devServer.app);
       }
     },
-    onAfterSetupMiddleware(devServer) {
+    onAfterSetupMiddleware (devServer) {
       // Redirect to `PUBLIC_URL` or `homepage` from `package.json` if url not match
       devServer.app.use(redirectServedPath(paths.publicUrlOrPath));
 
