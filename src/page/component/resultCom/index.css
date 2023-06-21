@@ -1,0 +1,22 @@
+.com_result {
+  padding: 10px 30px;
+}
+
+.com_result>p {
+  font-weight: bold;
+}
+
+.com_result>.com_result_item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--themeColor);
+}
+
+.com_result>.com_result_empty {
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  margin: 80px auto 0;
+  font-weight: bold;
+  color: var(--themeColor);
+  font-size: 40px;
+}
